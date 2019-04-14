@@ -2,6 +2,7 @@ img {
   width: 250px;
   display: float;
 }
-h1, #horned_animals {
+
+header {
   text-align: center;
 }
