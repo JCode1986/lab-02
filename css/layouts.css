@@ -44,3 +44,7 @@ main {
 .card {
   padding: 25px;
 }
+
+body {
+  background-color: cyan;
+}

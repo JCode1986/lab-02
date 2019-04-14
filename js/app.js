@@ -94,19 +94,20 @@ $(document).ready(() => {
 
   $('select').on('change', function() {
   let select_value = $(this).val();
-  $('main').hide()
+  $('main').empty()
   $(`.${select_value}`).show();
   console.log(select_value);
+  });
 });
-  $('select').on('click', 'p.big', function() {
-    all_creatures.sort((a,b) => {
-      if(a.title > b.title) {
-        return 1
-      }
-      if( a.title < b.title) return -1;
-      return 0;
-    })
-    $('main').empty();
-    // all_creatures.forEach(creature => creature.render());
-  })
-})
+// $('select').on('click', 'p.big', function() {
+//   all_creatures.sort((a,b) => {
+//     if(a.title > b.title) {
+//       return 1
+//     }
+//     if( a.title < b.title) return -1;
+//     return 0;
+//   })
+//   $('main').empty();
+//   all_creatures.forEach(creature => creature.render());
+//   })
+// })
