@@ -68,7 +68,6 @@ Creature.prototype.render = function(){
 
 Creature.prototype.make_option = function(){
   if($(`option[value=${this.keyword}]`).length) return;
-
   const new_html = creature_option_template(this);
   $('select').append(new_html);
 }
@@ -81,18 +80,25 @@ const get_creature_data = data => {
   })
 }
 
+//filter after clicking keyword
+
 $(document).ready(() => {
   get_creature_data('../data/page-1.json');
 
-  $('header').on('click', 'button', function(){
-    all_creatures = [];
-    $('main').empty();
-    console.log($(this).text());
-    get_creature_data(`${$(this).text()}.json`);
-  })
+  // $('select').on('change', function(){
+  //   all_creatures = [];
+  //   $('#deck').empty();
+  //   console.log($(this).text());
+  //   get_creature_data(`${$(this).text()}.json`);
+  // })
 
-  $('header').on('click', 'p.big', function() {
-    //sort them alphabetically
+  $('select').on('change', function() {
+  let select_value = $(this).val();
+  $('main').hide()
+  $(`.${select_value}`).show();
+  console.log(select_value);
+});
+  $('select').on('click', 'p.big', function() {
     all_creatures.sort((a,b) => {
       if(a.title > b.title) {
         return 1
