@@ -107,6 +107,6 @@ $(document).ready(() => {
       return 0;
     })
     $('main').empty();
-    all_creatures.forEach(creature => creature.render());
+    // all_creatures.forEach(creature => creature.render());
   })
 })

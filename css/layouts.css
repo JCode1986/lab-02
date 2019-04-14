@@ -3,12 +3,17 @@ img {
   height: 200px;
 }
 
+#footer {
+  text-align: center;
+}
+
 header {
   text-align: center;
 }
 
-.select_name {
+#select_name {
   text-align: center;
+  padding: 25px;
 }
 
 P {
@@ -24,4 +29,18 @@ h2 {
 .select_name {
   text-align: center;
   margin: 15px;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+#photo-template {
+  width: 0;
+}
+
+.card {
+  padding: 25px;
 }
