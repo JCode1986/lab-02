@@ -1,10 +1,10 @@
 # jquery-selectors-and-events
-Number and name of feature: ________________________________
+Number and name of feature: 
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 
 
-Start time: _____
+Start time: 1700
 
-Finish time: _____
+Finish time: 2053
 
-Actual time needed to complete: _____
+Actual time needed to complete: 

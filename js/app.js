@@ -1,44 +1,52 @@
 'use strict';
 
-const all_animals = [];
+let all_creatures = [];
 
-function Animal (horn){
-   this.image_url = horn.image_url;
-   this.title = horn.title;
-   this.description = horn.description;
-   this.keyword = horn.keyword;
-   this.horns = horn.horns;
- all_animals.push(this);
+const creatures_template_source = $('#creature-template').html();
+const creature_template = Handlebars.compile(creatures_template_source);
+
+const creature_option_template_source = $('#creature-option-template').html();
+const creature_option_template = Handlebars.compile(creature_option_template_source);
+
+function Creature(horn) {
+  this.image_url = horn.image_url;
+  this.title = horn.title;
+  this.description = horn.description;
+  this.keyword = horn.keyword;
+  this.horns = horn.horns;
 }
 
-Animal.get_animal_data = function(){
-  $.get('page-1.json', 'json').then( data => {
-    data.forEach(horn => new Animal(horn));
-    all_animals.forEach(horn => horn.render());
+Creature.prototype.render = function(){
+  const new_html = creature_template(this);
+  $('main').append(new_html);
+}
+
+Creature.prototype.make_option = function(){
+  if ($(`option[value=${this.keyword}]`).length) return;
+  
+  const new_html = creature_option_template(this);
+  $('select').append(new_html);
+}
+
+const get_creature_data = data => {
+  $.get(`${data}`, 'json').then(data => {
+    data.forEach(val => all_creatures.push(new Creature(val)));
+    all_creatures.forEach(creature => {creature.render()});
+    all_creatures.forEach(creature => {creature.make_option()})
   })
 }
 
-Animal.prototype.render = function(){
- const photo_section_html = $('#photo-template').html()
+//filter after clicking keyword
 
- $('main').append('<section id="clone"></section>');
- $('#clone').html(photo_section_html);
- $('#clone').find('h2').text(this.name);
- $('#clone').find('img').attr('src', this.image_url);
- $('#clone').find('p').text(this.title).text(this.description);
- $('#clone').attr('id', this.keyword);
- $('#clone').attr('class', this.keyword);
-}
-
-const test_animal = new Animal({});
-test_animal.render();
-
-$('#horned_animals').on('change', function() {
-  let select_value = $(this).val();
-  $('section').hide()
-  $(`.${select_value}`).show();
-  console.log(select_value);
+$(document).ready(() => {
+  get_creature_data('../data/page-1.json');
+  $('select').on('change', function() {
+    let select_value = $(this).val();
+    $('.card').hide();
+    let chosen = $('.card').filter(function(index, item) {
+      return $(item).attr('data-keyword') === select_value; //condition
+    });
+    chosen.show();
+    $('.card').css("margin-left", "auto").css("margin-right", "auto");
+  });
 });
-
-
-Animal.get_animal_data();
