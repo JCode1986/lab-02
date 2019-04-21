@@ -48,5 +48,12 @@ $(document).ready(() => {
     });
     chosen.show();
     $('.card').css('margin-left', 'auto').css('margin-right', 'auto');
+    $('.card').sort(function(a, b){
+      if(a.keyword < b.keyword) { return -1; }
+      if(a.keyword > b.keyword) { return 1; }
+      return 0;
+    })
   });
 });
+
+//sort alphabetically and by horns
