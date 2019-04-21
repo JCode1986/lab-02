@@ -23,7 +23,7 @@ Creature.prototype.render = function(){
 
 Creature.prototype.make_option = function(){
   if ($(`option[value=${this.keyword}]`).length) return;
-  
+
   const new_html = creature_option_template(this);
   $('select').append(new_html);
 }
@@ -47,6 +47,6 @@ $(document).ready(() => {
       return $(item).attr('data-keyword') === select_value; //condition
     });
     chosen.show();
-    $('.card').css("margin-left", "auto").css("margin-right", "auto");
+    $('.card').css('margin-left', 'auto').css('margin-right', 'auto');
   });
 });
