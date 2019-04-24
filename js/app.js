@@ -23,7 +23,7 @@ Creature.prototype.render = function(){
 
 Creature.prototype.make_option = function(){
   if ($(`option[value=${this.keyword}]`).length) return;
-  
+
   const new_html = creature_option_template(this);
   $('select').append(new_html);
 }
@@ -31,6 +31,9 @@ Creature.prototype.make_option = function(){
 const get_creature_data = data => {
   $.get(`${data}`, 'json').then(data => {
     data.forEach(val => all_creatures.push(new Creature(val)));
+    all_creatures.sort(function(a,b) {
+      return a.horn - b.horn;
+    })
     all_creatures.forEach(creature => {creature.render()});
     all_creatures.forEach(creature => {creature.make_option()})
   })
@@ -47,6 +50,13 @@ $(document).ready(() => {
       return $(item).attr('data-keyword') === select_value; //condition
     });
     chosen.show();
-    $('.card').css("margin-left", "auto").css("margin-right", "auto");
+    $('.card').css('margin-left', 'auto').css('margin-right', 'auto');
+    $('.card').sort(function(a, b){
+      if(a.keyword < b.keyword) { return -1; }
+      if(a.keyword > b.keyword) { return 1; }
+      return 0;
+    })
   });
 });
+
+//sort alphabetically and by horns
